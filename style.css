@@ -14,7 +14,7 @@ body{
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: url('stars.png');
+    background: url('./assets/stars.png');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -90,12 +90,10 @@ body{
     cursor: pointer;
 }
 
-/* 360 / 8 = 45deg */
-
 .container .wheel .number div#fireball {
     position: relative;
     transform: rotate(-50deg);
-    background: url('fireball.png');
+    background: url('./assets/fireball.png');
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
