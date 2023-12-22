@@ -69,9 +69,9 @@ for (let i = 0; i < wheelItems.length; i++) {
   div.setAttribute("style", `--i:${i}; --clr:${item.color}`);
 
   if (item.img) {
-    div.innerHTML = `<div id="task"><img src="${item.img}" /></div>`;
+    div.innerHTML = `<div id="task"><img src="${item.img}" />${item.id}</div>`;
   } else {
-    div.innerHTML = `<div id="fireball"></div>`;
+    div.innerHTML = `<div id="fireball">${item.id}</div>`;
   }
 
   wheel.appendChild(div);
@@ -79,27 +79,35 @@ for (let i = 0; i < wheelItems.length; i++) {
 
 function spin() {
   const numberOfItems = wheelItems.length;
-  const degreesPerItem = 360 / numberOfItems;
+  const degreesPerItem = 360 / numberOfItems; // 45 degrees for each item if there are 8 items
 
   // Randomly select an item
   const selectedItemIndex = Math.floor(Math.random() * numberOfItems);
-  const selectedItem = wheelItems[selectedItemIndex];
 
-  // Calculate the angle to the selected item
-  // Assuming the wheel starts with the first item at the top
-  const angleToItem = selectedItemIndex * degreesPerItem;
+  // Calculate the angle to rotate to the adjusted item
+  // Adding an extra 45 degrees to ensure it lands correctly
+  const targetPosition =
+    ((numberOfItems - selectedItemIndex) % numberOfItems) * degreesPerItem + 45;
 
-  // Calculate the spin angle
-  // Add extra rotations for a more dramatic spin
-  const extraRotations = 360 * 5; // For example, 3 extra full rotations
-  const finalAngle = value + extraRotations + angleToItem - (value % 360);
+  // Adjust for the current position of the wheel
+  const currentAngle = value % 360;
+  let angleToRotate = targetPosition - currentAngle;
+
+  // Normalize the angle
+  if (angleToRotate < 0) {
+    angleToRotate += 360;
+  }
+
+  // Add extra rotations for a dramatic effect
+  const extraRotations = 360 * (3 + Math.floor(Math.random() * 5)); // 3 to 5 extra full rotations
+  const finalAngle = value + angleToRotate + extraRotations;
 
   // Update the wheel
   wheel.style.transform = "rotate(" + finalAngle + "deg)";
   value = finalAngle; // Update the current value
 
   // Output the selected item
-  console.log("Selected Item:", selectedItem.name);
+  console.log("Selected Item Index:", selectedItemIndex + 1); // +1 for display purposes
 }
 
 spinBtn.onclick = function () {
