@@ -1,5 +1,5 @@
 :root {
-    --segment-count: 8; /* Number of segments */
+    --segment-count: 12; /* Number of segments */
 }
 
 *{
@@ -21,10 +21,64 @@ body{
 
 }
 
-.container{
+#result {
+    height: 250px;
+    width: 500px;
+    border-radius: 25px;
+    background-color: #c7005c;
+    color: white;
+    position: absolute;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    left: 0;
+    right: 0;
+    margin: auto;
+    transform: translateY(-50%);
+    z-index: 1000;
+    top: 50%;
+    visibility: hidden;
+    animation: spin 2s;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+}
+
+#result h1 {
+    animation-name: growText;
+    animation-duration: 2000ms;
+    text-align: center;
+    font-size: 22px;
+}
+
+@keyframes growText {
+    from {
+        font-size: 0px;
+        opacity: 0;
+    }
+    to {
+       font-size: 22px;
+       opacity: 1;
+    }
+}
+
+
+@keyframes spin {
+    0% {
+        height:0px;
+        width: 0px;
+        transform: translateY(-50%);
+    }
+    100% {
+        height: 250px;
+        width: 500px;
+        transform: translateY(-50%);
+    }
+}
+
+.container {
     position: relative;
-    width: 600px;
-    height: 600px;
+    width: 1000px;
+    height: 1000px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -81,8 +135,7 @@ body{
     background: var(--clr);
     transform-origin: bottom right;
     transform: rotate(calc(360deg / var(--segment-count) * var(--i)));
-    clip-path: polygon(0 0,56% 0,
-    100% 100%,0 56%);
+    clip-path: polygon(0 0, 38% 0, 100% 100%, 0 45%);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -97,19 +150,23 @@ body{
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
-    height: 150px;
-    width: 150px;
+    height: 200px;
+    width: 200px;
+    margin-left: -20px;
 }
 
 
 .container .wheel .number img{
     position: relative;
     transform: rotate(-50deg);
-    height: 100px;
-    width: 100px;
+    height: 150px;
+    width: 150px;
     border-radius: 50%;
     object-fit: contain;
     box-shadow: 1px 1px 10px rgba(0,0,0,0.5);
     border: 1px solid #f79725;
 }
 
+#task {
+    margin-left: -20px;
+}
